@@ -56,7 +56,12 @@ class App extends Component {
             )
             }
         return (
-        <div key={smurf.id}>
+        <div className="Smurf" key={smurf.id}>
+          <img 
+            className="smurf-image"
+            src="https://cdn.vox-cdn.com/thumbor/oIRY68qFM3SiUyNQWoYwt_c3BM4=/0x0:2560x1600/1200x800/filters:focal(1662x443:2070x851)/cdn.vox-cdn.com/uploads/chorus_image/image/54121337/smurfscover.0.jpg"
+            alt="smurf image"
+          />
           <h2>{smurf.name}</h2>
           <h5>Age: {smurf.age}</h5>
           <h5>Height: {smurf.height}</h5>

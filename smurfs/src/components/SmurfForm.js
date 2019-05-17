@@ -6,7 +6,7 @@ import { addSmurf } from '../actions'
 class SmurfForm extends React.Component{
     state = {
         smurf: {
-            name: " ",
+            name: "",
             age: "",
             height: ""
         }
@@ -21,7 +21,7 @@ class SmurfForm extends React.Component{
         this.setState({
             smurf: {
                 ...this.state.smurf,
-                [e.target.name]: value
+                [e.target.name]: e.target.value
             }
         });
     };
@@ -48,13 +48,13 @@ class SmurfForm extends React.Component{
                 <input 
                 type="text"
                 name="name"
-                placeholder="Smurf Name"
+                placeholder="Name"
                 onChange={this.handleChanges}
                 value={this.state.smurf.name}
                 />
                  <label htmlFor="age">Smurf's Age</label>
                 <input 
-                type="text"
+                type="number"
                 name="age"
                 placeholder="Age"
                 onChange={this.handleChanges}
