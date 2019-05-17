@@ -1,5 +1,11 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import Loader from 'react-loader-spinner';
 import './App.css';
+import SmurfForm from './SmurfForm'
+import EditForm from './EditForm';
+
+import { getSmurfs, deleteSmurf, editSmurf } from '../actions';
 /*
  to wire this component up you're going to need a few things.
  I'll let you do this part on your own. 
@@ -7,16 +13,74 @@ import './App.css';
  `How do I ensure that my component links the state to props?`
  */
 class App extends Component {
+  state ={
+    deletingSmurf: null,
+    editingSmurfId: null
+  }
+  componentDidMount(){
+    this.props.getSmurfs();
+  }
+
+  deleteSmurf= id => {
+    this.setState({ deletingSmurfId: id});
+    this.props.deleteSmurf(id)
+  }
+
+  editSmurf = (e, smurf) => {
+    e.preventDefault();
+    this.props.editSmurf(smurf).then(() =>{
+    this.setState({ editingSmurfId: null })
+    });
+  }
+
   render() {
+    if (this.props.fetchingSmurfs)
+    return (
+      <div className="smurfs">
+      <Loader type="Ball-Triangle" color="#00BFFF" height="90" width="60" />
+      </div>
+    )
     return (
       <div className="App">
         <h1>SMURFS! 2.0 W/ Redux</h1>
-        <div>Welcome to your Redux version of Smurfs!</div>
-        <div>Start inside of your `src/index.js` file!</div>
-        <div>Have fun!</div>
+        {this.props.smurfs.map(smurf => {
+          if (this.state.editingSmurfId === smurf.id){
+            return (
+              <div  key={smurf.id}>
+                <EditForm 
+                smurf={smurf}
+                editSmurf={this.editSmurf}
+                editingSmurf={this.props.editingSmurf}
+                />
+                </div>
+            )
+            }
+        return (
+        <div className="Smurf" key={smurf.id}>
+          <img 
+            className="smurf-image"
+            src="https://cdn.vox-cdn.com/thumbor/oIRY68qFM3SiUyNQWoYwt_c3BM4=/0x0:2560x1600/1200x800/filters:focal(1662x443:2070x851)/cdn.vox-cdn.com/uploads/chorus_image/image/54121337/smurfscover.0.jpg"
+            alt="smurf image"
+          />
+          <h2>{smurf.name}</h2>
+          <h5>Age: {smurf.age}</h5>
+          <h5>Height: {smurf.height}</h5>
+          <button onClick={() => this.setState({editingSmurfId: smurf.id})}>Edit Smurf</button>
+          <button onClick={() => this.deleteSmurf(smurf.id)}>Delete Smurf</button>
+          {this.props.deletingSmurf && this.state.deletingSmurfId === smurf.id && (
+            <p>Deleting Smurf D:</p>
+          )}
+          </div>
+        );
+          })}
+          <SmurfForm />
       </div>
-    );
+        );
   }
 }
 
-export default App;
+const mapStateToProps = ({ smurfs, deletingSmurf, fetchingSmurfs, editingSmurf }) => ({
+  smurfs, deletingSmurf, fetchingSmurfs, editingSmurf
+})
+
+export default connect(mapStateToProps, { getSmurfs, deleteSmurf, editSmurf }) (App);

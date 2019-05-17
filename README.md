@@ -23,8 +23,16 @@ In this challenge, you are to build the Smurfs village once again, only this tim
 Demonstrate your understanding of this Sprint's concepts by answering the following free-form questions. Edit this document to include your answers after each question. Make sure to leave a blank line above and below your answer so it is clear and easy to read by your project manager.
 
 - [ ] In your own words, describe `actions`, `reducers` and the `store` and their role in Redux. What does each piece do? Why is the store known as a 'single source of truth' in a redux application?
+
+Actions in Redux are a folder of intormation that holds an action type and the data (the type and the optional payload property) that we want associated with that action type. Actions are passed to our reducer as an argument and when our reducer gets that action it will tell it how to update the state according to the type and payload from our action. Reducers can formulate the new version of state based on the current state and the action we gave it. They are the glue that bind our Actions and Store together and the Store contains the state for our application.
+
 - [ ] What is the difference between Application state and Component state? When would be a good time to use one over the other?
+
+Component state is stored locally within a component and is not accessible from other components unless it's passed as props to it's sub components where as with Application state, the state is immutable and  is accessible to any component that subscribes to it. It would be good to use Application state over Component state if the application is going to be a large scaling project that might be hard to debug after a certain mass because with Application state there is one source of truth and using it can make the code easier to maintain. 
+
 - [ ] Describe `redux-thunk`, what does it allow us to do? How does it change our `action-creators`?
+
+Redux Thunk is a middleware that lets us handle asynchronous operations inside of our action creators. With Thunk we can change up the action creators to perform async API calls since thunks are functions that are returned by another function. When we use thunk it will look at what is returned and if the thing returned is an action, it will forward the action through to the reducer but if the thing is a function then it will invoke that function and pass in the dispatch function as an argument to it. 
 
 ## Project Set Up
 

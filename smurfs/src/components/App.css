@@ -2,27 +2,136 @@
   text-align: center;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
+.smurf-image{
+  max-width:500px;
 }
 
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
+/*Button Design */
+button {
+  position: relative;
+  display: inline-block;
+  box-sizing: border-box;
+  margin: 0 8px;
+  border: none;
+  border-radius: 2px;
+  padding: 0 16px;
+  min-width: 64px;
+  height: 36px;
+  vertical-align: middle;
+  text-align: center;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  color: #fff;
+  background-color: #004080;
+  box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2),
+    0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
+  font-family: 'Roboto', 'Segoe UI', BlinkMacSystemFont, system-ui,
+    -apple-system;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 36px;
+  overflow: hidden;
+  outline: none;
+  cursor: pointer;
+  transition: box-shadow 0.2s;
 }
 
-.App-title {
-  font-size: 1.5em;
+button:hover,
+button:focus {
+  box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2),
+    0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);
 }
 
-.App-intro {
-  font-size: large;
+button:active {
+  box-shadow: 0px 5px 5px -3px rgba(0, 0, 0, 0.2),
+    0px 8px 10px 1px rgba(0, 0, 0, 0.14), 0px 3px 14px 2px rgba(0, 0, 0, 0.12);
 }
 
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+button:disabled {
+  color: rgba(0, 0, 0, 0.38);
+  background-color: rgba(0, 0, 0, 0.12);
+  box-shadow: none;
+  cursor: initial;
+}
+
+button::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background-color: currentColor;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+button:hover::before {
+  opacity: 0.12;
+}
+
+button:focus::before {
+  opacity: 0.2;
+}
+
+button:active::before {
+  opacity: 0.32;
+}
+
+button:disabled::before {
+  opacity: 0;
+}
+
+button::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 18px;
+  border-radius: 50%;
+  padding: 50%;
+  width: 32px;
+  height: 32px;
+  background-color: currentColor;
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(1);
+  transition: opacity 1s, transform 0.5s;
+}
+
+button:active::after {
+  opacity: 0.4;
+  transform: translate(-50%, -50%) scale(0);
+  transition: transform 0s;
+}
+
+button:disabled::after {
+  opacity: 0;
+}
+
+/*Form Styles */
+form {
+  margin: 0 auto;
+  width: 300px;
+  border: 1px solid black;
+}
+
+input {
+  border: 0;
+  margin: 25px 0;
+  outline: none;
+  font-size:20px
+}
+
+.form-button {
+  margin: 24px 0;
+}
+
+.Smurf {
+  border: 1px solid #efefef;;
+  margin: 20px 400px;
+  padding:10px 0;
+  box-shadow: 2px 2px 2px 2px grey;
+}
+
+.Smurf img {
+  box-shadow: 2px 2px 2px 2px grey;
 }
