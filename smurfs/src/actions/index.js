@@ -14,7 +14,9 @@ export const getSmurfs = () => dispatch => {
   .then(res => {
     dispatch({ type: FETCH_SMURFS_SUCCESS, payload: res.data });
   })
-  .catch(err => console.log(err))
+  .catch(err => {
+    dispatch({ type: FETCH_SMURFS_FAILURE, payload: err.response })
+  })
 }
 
 export const ADD_SMURFS_START = "ADD_SMURFS_START";
@@ -28,7 +30,9 @@ export const addSmurf = smurf => dispatch => {
   .then(res => {
     dispatch({ type: ADD_SMURFS_SUCCESS, payload: res.data });
   })
-  .catch(err => console.log(err))
+  .catch(err => {
+    dispatch({ type: ADD_SMURFS_FAILURE, payload: err.response })
+  })
 }
 
   export const DELETE_START = "DELETE_START";
@@ -42,9 +46,27 @@ export const addSmurf = smurf => dispatch => {
     .then(res => {
       dispatch({ type:DELETE_SUCCESS, payload: res.data })
     })
-    .catch(err => console.log(err))
+    .catch(err => {
+      dispatch({ type: DELETE_FAILURE, payload: err.response })
+    })
   } 
-/*
+
+  export const EDIT_SMURF_START = "EDIT_SMURF_START";
+  export const EDIT_SMURF_SUCCESS = "EDIT_SMURF_SUCCESS";
+  export const EDIT_SMURF_FAILURE = "EDIT_SMURF_FAILURE";
+
+  export const editSmurf = smurf => dispatch => {
+    dispatch({ type: EDIT_SMURF_START });
+    return axios
+    .put(`http://localhost:3333/smurfs/${smurf.id}`, smurf)
+    .then(res => {
+      dispatch({ type: EDIT_SMURF_SUCCESS, payload: res.data })
+    })
+    .catch(err => {
+      dispatch({ type: EDIT_SMURF_FAILURE, payload: err.response })
+    })
+  }
+ /*
   For this project you'll need at least 2 action creators for the main portion,
    and 2 more for the stretch problem.
    Be sure to include action types for each type of action creator. Also, be sure to mind

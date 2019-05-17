@@ -1,4 +1,4 @@
-import { FETCH_SMURFS_START, FETCH_SMURFS_SUCCESS, FETCH_SMURFS_FAILURE, ADD_SMURFS_START, ADD_SMURFS_SUCCESS, ADD_SMURFS_FAILURE, DELETE_START, DELETE_SUCCESS, DELETE_FAILURE } from '../actions';
+import { FETCH_SMURFS_START, FETCH_SMURFS_SUCCESS, FETCH_SMURFS_FAILURE, ADD_SMURFS_START, ADD_SMURFS_SUCCESS, ADD_SMURFS_FAILURE, DELETE_START, DELETE_SUCCESS, DELETE_FAILURE, EDIT_SMURF_START, EDIT_SMURF_SUCCESS, EDIT_SMURF_FAILURE } from '../actions';
 /*
   Be sure to import in all of the action types from `../actions`
 */
@@ -8,6 +8,7 @@ const initialState = {
   fetchingSmurfs: false,
   addingSmurf: false,
   deletingSmurf: false,
+  editingSmurf: false,
   error: null
 }
 
@@ -78,6 +79,24 @@ const reducer = (state = initialState, action) => {
       ...state,
       deletingSmurf: false,
       error: action.payload
+    };
+    case EDIT_SMURF_START:
+    return{
+      ...state,
+      editingSmurf: true
+    };
+    case EDIT_SMURF_SUCCESS:
+    return{
+      ...state,
+      editingSmurf: false,
+      error: '',
+      smurfs: action.payload
+    };
+    case EDIT_SMURF_FAILURE:
+      return {
+        ...state,
+        editingSmurf: false,
+        error: action.payload
     };
     default:
     return state;
