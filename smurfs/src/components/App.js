@@ -21,7 +21,7 @@ class App extends Component {
       <div className="App">
         <h1>SMURFS! 2.0 W/ Redux</h1>
         {this.props.smurfs.map(smurf => 
-        <div>
+        <div key={smurf.id}>
           <h2>{smurf.name}</h2>
           <h5>{smurf.age}</h5>
           <h5>{smurf.height}</h5>

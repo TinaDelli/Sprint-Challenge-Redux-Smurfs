@@ -36,6 +36,12 @@ const reducer = (state = initialState, action) => {
       fetchingSmurfs: false,
       smurfs: action.payload
     };
+    case FETCH_SMURFS_FAILURE:
+    return{
+      ...state,
+      fetchingSmurfs:false,
+      error: action.payload
+    };
     case ADD_SMURFS_START:
     return {
       ...state,
@@ -48,6 +54,12 @@ const reducer = (state = initialState, action) => {
       error:'',
       smurfs: action.payload
     };
+    case ADD_SMURFS_FAILURE:
+    return{
+      ...state,
+      addingSmurf: false,
+      error: action.payload
+    }
     default:
     return state;
   }
